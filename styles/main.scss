@@ -1,0 +1,243 @@
+$primary: #61b15a;
+$primary-darker: darken($primary, 10%);
+$primary-darkest: darken($primary, 20%);
+$echoes: slateblue;
+$choice: darkgoldenrod;
+$stage-size: 75vh;
+
+html,
+body {
+  margin: 0;
+}
+
+.jspsych-btn {
+  display: flex;
+  align-items: center;
+}
+
+.jspsych-display-element {
+  background-color: #ffffff;
+}
+
+.jspsych-btn.primary {
+  background-color: $primary;
+  border-color: $primary-darker;
+  color: white;
+  &:not(:disabled):hover {
+    background-color: $primary-darker;
+    border-color: $primary-darkest;
+  }
+}
+
+.jspsych-btn:disabled {
+  opacity: 0.5;
+}
+
+.button-set {
+  display: flex;
+  justify-content: center;
+  & > *:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.text-content {
+  max-width: 700px;
+  text-align: left;
+  &.centered {
+    text-align: center;
+  }
+}
+
+@keyframes echo-fade {
+  0% {
+    transform: translateX(-50%) translateY(-50%) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) scale(100);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.continue-key {
+  animation: fade-in;
+  animation-duration: 0.5s;
+}
+
+.echo-visualization {
+  &.high-speed {
+    .stage .echo-animation {
+      animation-duration: 0.5s;
+    }
+  }
+  .description {
+    text-align: left;
+    height: 120px;
+    margin-bottom: 10px;
+    width: $stage-size;
+  }
+  .stage {
+    margin: 0 auto;
+    overflow: hidden;
+    width: $stage-size;
+    height: $stage-size;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.keyset {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.choice-keyset {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+
+  .choice-keyset-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.keyboard-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $echoes;
+  color: white;
+  border-radius: 2px;
+  border: 2px solid darken($echoes, 10%);
+  text-transform: uppercase;
+  width: 1.2em;
+  height: 1.2em;
+  font-size: 0.8em;
+  &.long {
+    width: unset;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  &.chosen {
+    background: $choice;
+    border-color: darken($choice, 10%);
+  }
+}
+
+.progress-indicator {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 650px;
+  margin-bottom: 20px;
+  .label {
+    flex-shrink: 0;
+    margin-right: 20px;
+  }
+  .bar {
+    width: 100%;
+    height: 15px;
+    flex-grow: 1;
+    justify-content: space-between;
+    display: flex;
+    .block {
+      width: calc(20% - 5px);
+      background: #eee;
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+      .block-progress {
+        height: 100%;
+        background: $primary;
+      }
+    }
+  }
+}
+
+.choice-box {
+  display: flex;
+  align-items: first baseline;
+  border: 2px solid #eee;
+  border-radius: 2px;
+  padding: 0px 10px;
+  cursor: pointer;
+
+  &:not(.disabled):not(.selected):hover {
+    background: darken(white, 3%);
+  }
+
+  &.selected {
+    background: lighten($primary, 30%);
+    border-color: $primary;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .inner {
+    padding: 10px;
+    .title {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    text-align: left;
+  }
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.warning {
+  background: cornsilk;
+  border: 2px solid darken(cornsilk, 50%);
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.volume-choice {
+  display: flex;
+  align-items: center;
+  .jspsych-btn {
+    margin-left: 10px;
+    &::after {
+      margin-left: 0.5em;
+      font-size: 0.8em;
+      content: '▶';
+    }
+  }
+}
+
+.consent-form-content {
+  position: relative;
+  height: 500px;
+  max-height: 70vw;
+  overflow-y: scroll;
+  padding: 20px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  section:first-child > *:first-child {
+    margin-top: 0;
+  }
+  li:not(:last-child) {
+    margin-bottom: 0.5em;
+  }
+}
